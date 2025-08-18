@@ -11,7 +11,7 @@ always @(posedge clock or posedge clear) begin
         state <= 2'b00;  // reset ve 0
     end
     else begin
-        state <= state + 1;  // tang trang thai dem len 1
+        state <= state + 1'b1;  // tang trang thai dem len 1
     end
 end
 

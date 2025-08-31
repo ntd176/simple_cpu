@@ -12,22 +12,22 @@ module counter2_tb;
 		.state(state_tb)
 	);
 
-// CK clock 10ns (tan so 100 MHz)
+// CK clock 20ns (tan so 50 MHz)
 	initial begin
 		clock_tb = 0;
 		forever #10 clock_tb = ~clock_tb; // sau 10ns clock dao trang thai
 	end
 	
 	initial begin
-		//01 test reset
+		// 01 test reset
 		clear_tb = 1'b1;
 		#15; 
 		
-		//02 test bo dem
+		// 02 test bo dem
 		clear_tb = 1'b0;
 		#100;
 		
-		//03 test reset trong luc dem
+		// 03 test reset trong luc dem
 		clear_tb = 1'b1;
 		#20;
 		clear_tb = 1'b0;

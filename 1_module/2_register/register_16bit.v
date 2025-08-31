@@ -1,14 +1,14 @@
 // Thanh ghi 16 bit
 
 module register_16bit (
-	input clk,
-	input enable,
-	input [15:0] data_in,
-	output reg [15:0] data_out
+	input clock,
+	input rin_en,
+	input [15:0] buswires,
+	output reg [15:0] rout
 );
-	always @(posedge clk) begin
-		if (enable) begin
-			data_out <= data_in;
+	always @(posedge clock) begin
+		if (rin_en) begin
+			rout <= buswires;
 		end 
 	end
 	

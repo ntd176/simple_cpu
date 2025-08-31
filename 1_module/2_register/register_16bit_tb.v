@@ -2,45 +2,45 @@
 
 module register_16bit_tb; 
 
-	reg clk_tb;
-    reg enable_tb;
-	reg [15:0] data_in_tb;
-    wire [15:0] data_out_tb; 
+	reg clock_tb;
+    reg rin_en_tb;
+	reg [15:0] buswires_tb;
+    wire [15:0] rout_tb; 
 
     register_16bit dut (
-		.clk(clk_tb),
-		.enable(enable_tb),
-		.data_in(data_in_tb),
-		.data_out(data_out_tb)
+		.clock(clock_tb),
+		.rin_en(rin_en_tb),
+		.buswires(buswires_tb),
+		.rout(rout_tb)
 	);
 
-// CK clock 10ns (tan so 100 MHz)
+// CK clock 20ns (tan so 50 MHz)
 	initial begin
-		clk_tb = 0;
-		forever #10 clk_tb = ~clk_tb; // sau 10ns clock dao trang thai
+		clock_tb = 0;
+		forever #10 clock_tb = ~clock_tb;
 	end
 	
 	initial begin
-		//01 tao gia tri ban dau
-		enable_tb = 0;
-		data_in_tb = 16'h0000;
-		#15; 
+		// 01 gia tri ban dau
+		rin_en_tb = 0;
+		buswires_tb = 16'h0000;
+		#10; 
 		
-		//02 load data khi enable = 1
-		enable_tb = 1;
-		data_in_tb = 16'hAAAA;
-		#10;
-		data_in_tb = 16'h5555;
-		#10;
+		// 02 load data khi enable = 1
+		rin_en_tb = 1;
+		buswires_tb = 16'hAAAA;
+		#60;
+		buswires_tb = 16'hBBBB;
+		#60;
 		
-		//03 load data khi enable = 0
-		enable_tb = 0;
-		data_in_tb = 16'hFFFF;
+		// 03 load data khi enable = 0
+		rin_en_tb = 0;
+		buswires_tb = 16'hCCCC;
+		#40;
+		
+		// 04 continue enable = 1
+		rin_en_tb = 1;
 		#20;
-		
-		//04 continue enable = 1
-		enable_tb = 1;
-		#10;
 		$finish;
 	end
 

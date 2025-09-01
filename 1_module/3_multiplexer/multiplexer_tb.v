@@ -37,27 +37,26 @@ module multiplexer_tb;
 		r6_tb 		= 16'h6666;
 		r7_tb 		= 16'h7777;
 		
-		
 		// 01 test din_en
-		#10; // expect result buswires_tb = AAAA
 		din_en_tb = 1; // uu tien 1
 		gout_tb = 1; // uu tien 2
 		rout_tb  = 3'b000; // uu tien 3
+		#40; // expect result buswires_tb = AAAA
 		
 		// 02 test gout
-		#30; // expect result buswires_tb = BBBB
 		din_en_tb = 0;
 		gout_tb = 1; // uu tien 1
 		rout_tb = 3'b101; // uu tien 2
+		#40; // expect result buswires_tb = BBBB
 		
 		// 03 test rout
-		#20; // expect result buswires_tb = 0000, 1111,..., 7777 
 		din_en_tb = 0;
 		gout_tb = 0;
 		for (i=0; i<8; i=i+1) begin
 			rout_tb = i;
-			#10;
+			#20;
 		end
+		// expect result buswires_tb = 0000, 1111,..., 7777 
 		$finish;
 	end
 

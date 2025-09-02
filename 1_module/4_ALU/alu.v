@@ -5,13 +5,15 @@ module alu (
 	input [15:0] buswires,
 	// input control
 	input ain, // register A
-	input gin, // register B
+	input gin, // register G
 	input sub, // sub=0-->add, sub=1-->sub
 	// output
-	output reg [15:0] aluout
+	output [15:0] aluout
 );
 	reg [15:0] reg_A;
+	reg [15:0] reg_G;
 	
+	wire [15:0] raout;
 	wire [15:0] addsub_result;
 	
 	// load data in register A
@@ -21,14 +23,18 @@ module alu (
 		end
 	end
 	
-	// add sub caculate
-	assign addsub_result = (sub==1'b0) ? (reg_A + buswires) : (reg_A - buswires);
+	assign raout = reg_A;
 	
-	// result in register B
+	// add sub caculate
+	assign addsub_result = (sub==1'b0) ? (raout + buswires) : (raout - buswires);
+	
+	// result in register G
 	always @(posedge clock) begin
 		if (gin) begin
-			aluout <= addsub_result;
+			reg_G <= addsub_result;
 		end
 	end
+	
+	assign aluout = reg_G;
 	
 endmodule

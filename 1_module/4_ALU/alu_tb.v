@@ -28,45 +28,45 @@ module alu_tb;
 	initial begin
 		// init value
 		buswires_tb = 16'd0;
-		ain_tb = 0;
-		sub_tb = 0;
-		gin_tb = 0;
-		#10;
+		ain_tb = 1'b0;
+		sub_tb = 1'b0;
+		gin_tb = 1'b0;
+		#20;
 		
 		// test I
 		// CK_1 load in register A
 		buswires_tb = 16'd100;
-		ain_tb = 1;
-		sub_tb = 0; // add
-		gin_tb = 0;
+		ain_tb = 1'b1;
+		sub_tb = 1'b0; // add
+		gin_tb = 1'b0;
 		#20;
 		
-		// CK_2 load in register B
+		// CK_2 load in register G
 		buswires_tb = 16'd50;
-		ain_tb = 0;
-		gin_tb = 1;
+		ain_tb = 1'b0;
+		gin_tb = 1'b1;
 		#20; // result 16'd150
 		
 		// 01 off controll
-		gin_tb = 0;
+		gin_tb = 1'b0;
 		#30;
 		
 		// test II
 		// CK_1 load in register A
 		buswires_tb = 16'd200;
-		ain_tb = 1;
-		sub_tb = 1; // sub
-		gin_tb = 0;
+		ain_tb = 1'b1;
+		sub_tb = 1'b1; // sub
+		gin_tb = 1'b0;
 		#20;
 		
-		// CK_2 load in register B
+		// CK_2 load in register G
 		buswires_tb = 16'd25;
-		ain_tb = 0;
-		gin_tb = 1;
+		ain_tb = 1'b0;
+		gin_tb = 1'b1;
 		#20; // result 16'd175
 		
 		// 02 off controll
-		gin_tb = 0;
+		gin_tb = 1'b0;
 		#30;
 		
 		$finish;
